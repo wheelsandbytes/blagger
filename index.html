@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>blagger</title>
+<style>
+html {
+  font-family: Menlo, Monaco, monospace;
+}
+body {
+  background-color: #333;
+  color: #eee;
+  margin: 1rem;
+}
+input[type=text] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #eee;
+  border-radius: 4px;
+}
+input[type=text]:focus {
+  border: 3px solid #aaa;
+}
+.posts {
+  width: 80%;
+  border: 2px solid green;
+}
+</style>
+  </head>
+  <body>
+    <h1>blagger</h1>
+    <div id="post-input-field">
+      <input type="text" placeholder="plz blog here..." />
+    </div>
+    <div id="posts" class="posts">
+      <div id="post-1">
+        <h2 class="post-title">
+          example post 1
+        </h2>
+        <p class="post-timestamp">
+        </p>
+        <p class="post-text">
+        blah blah blah some example post text here
+        </p>
+      </div>
+    </div>
+    <script>
+      console.log("hello world")
+    </script>
+  </body>
+</html>
