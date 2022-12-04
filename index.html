@@ -65,6 +65,8 @@ input[type=submit] {
     <i id="saved-or-loaded-message" style="display:none;"></i>
     <input type="button" value="save" onclick="saveToLocalStorage()" />
     <input type="button" value="load" onclick="loadFromLocalStorage()" />
+    <input type="button" value="new" onclick="eraseAllPosts()" />
+    <input type="button" value="delete saved posts" onclick="clearLocalStorage()" />
     <div id="post-input" class="post-input">
       <input id="post-text-field" type="text" placeholder="plz blog here..." />
       <input id="post-button-submit" type="submit" onclick="createPost()" value="post" />
@@ -92,15 +94,15 @@ input[type=submit] {
         const timestamp = getCurrentTimestamp()
         posts.push({timestamp, postText})
         updateWithNewPost({timestamp, postText})
+        saveToLocalStorage()
       }
 
       function updateWithNewPost ({timestamp, postText}) {
         const postsSection = document.getElementById('posts')
         const postDiv = document.createElement('div')
         postDiv.id = timestamp
-        const formattedTimestamp = new Date(timestamp).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})
-        const formattedTimestamp2 = new Date(timestamp).toLocaleString()
-        postDiv.innerHTML = `<p class="post-text">${postText}</p><p class="post-timestamp">${formattedTimestamp2}</p>`
+        const formattedTimestamp = new Date(timestamp).toLocaleString()
+        postDiv.innerHTML = `<p class="post-text">${postText}</p><p class="post-timestamp">${formattedTimestamp}</p>`
         return postsSection.insertBefore(postDiv, postsSection.children[0])
       }
 
@@ -109,6 +111,11 @@ input[type=submit] {
         posts.forEach((post, i) => {
           return updateWithNewPost(post)
         })
+      }
+
+      function eraseAllPosts () {
+        const postsSection = document.getElementById('posts')
+        postsSection.innerHTML = ''
       }
 
       function loadFromLocalStorage () {
@@ -128,6 +135,14 @@ input[type=submit] {
         const savedMessage = document.getElementById('saved-or-loaded-message')
         savedMessage.style.display = "block"
         savedMessage.innerText = "saved posts to localStorage on " + new Date(getCurrentTimestamp()).toLocaleString()
+        return
+      }
+
+      function clearLocalStorage () {
+        localStorage.removeItem('posts')
+        const deletedMessage = document.getElementById('saved-or-loaded-message')
+        deletedMessage.style.display = "block"
+        deletedMessage.innerText = "deleted posts from localStorage on " + new Date(getCurrentTimestamp()).toLocaleString()
         return
       }
     </script>
